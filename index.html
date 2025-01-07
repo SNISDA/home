@@ -39,8 +39,8 @@
             opacity: 0;
             transition: opacity 0.5s ease-in;
             min-height: 100vh;
-            border: 5px solid rgba(246, 222, 90, 1.0); /* 枠線を追加 */
-            box-sizing: border-box; /* paddingとborderを幅に含める */
+            /* border: 5px solid rgba(246, 222, 90, 1.0);  枠線を削除 */
+            box-sizing: border-box;
         }
         .content.visible {
             opacity: 1;
@@ -85,6 +85,21 @@
                 transform: translateX(0);
                 opacity: 1;
             }
+        }
+         footer {
+            position: relative; /* 線の基準位置 */
+            text-align: center;
+            padding: 10px 0;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%; /* 線の幅 */
+            height: 2px; /* 線の太さ */
+            background-color: rgba(246, 222, 90, 1.0); /* 線の色 */
         }
         @media (min-width: 768px) {
             .content {
