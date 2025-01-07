@@ -29,24 +29,47 @@
             opacity: 0;
             display: none;
         }
+          .main-image-container {
+            position: fixed; /* 固定配置 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+             z-index: 998; /* メッセージより後ろに表示 */
+            display: none;
+        }
+         .main-image-container.visible {
+            display: block;
+        }
+         .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 画像をカバー表示 */
+           opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+         .main-image.visible {
+          opacity: 1;
+         }
         .main-message {
-            display: none; /*最初は非表示*/
+            display: none;
             width: 100%;
             height: 100vh;
             color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 4rem; /* テキストのサイズを大きく */
-            text-align: center; /* テキストを中央揃え */
-            position: fixed; /* welcome-messageと同じく固定配置 */
-            z-index: 999; /* 他の要素の上に表示 */
-            opacity: 0; /* フェードインのため透明にする */
-            transition: opacity 0.5s ease-in; /* フェードインのアニメーションを設定 */
+            font-size: 4rem;
+            text-align: center;
+            position: fixed;
+            z-index: 999; /* 画像より前に表示 */
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+           
         }
         .main-message.visible {
-            opacity: 1; /* フェードイン */
-            display: flex;
+            opacity: 1;
+           display: flex;
         }
         .content {
             display: flex;
@@ -59,7 +82,7 @@
             transition: opacity 0.5s ease-in;
             min-height: 100vh;
             box-sizing: border-box;
-            margin-top: 100vh; /*メインメッセージの高さ分だけ下にずらす*/
+            margin-top: 100vh;
         }
         .content.visible {
             opacity: 1;
@@ -137,6 +160,9 @@
 </head>
 <body>
     <div class="welcome-message" id="welcomeMessage">Welcome!</div>
+    <div class="main-image-container" id="mainImageContainer">
+        <img src="main.png" alt="Main Image" class="main-image" id="mainImage">
+    </div>
     <div class="main-message" id="mainMessage">Decision support based on data</div>
     <div class="content" id="mainContent">
         <div class="image-content">
@@ -167,6 +193,8 @@
     <script>
       window.addEventListener('DOMContentLoaded', function() {
             const welcomeMessage = document.getElementById('welcomeMessage');
+            const mainImageContainer = document.getElementById('mainImageContainer');
+             const mainImage = document.getElementById('mainImage');
             const mainMessage = document.getElementById('mainMessage');
             const mainContent = document.getElementById('mainContent');
             const bannerImage = document.getElementById('bannerImage');
@@ -174,6 +202,8 @@
 
             setTimeout(() => {
                 welcomeMessage.classList.add('hidden');
+                 mainImageContainer.classList.add('visible') //画像を非表示を解除
+                mainImage.classList.add('visible');
                  mainMessage.classList.add('visible');
                   window.addEventListener('scroll', handleScroll);
             }, 1000);
@@ -187,7 +217,7 @@
                       setTimeout(() => {
                         textContent.classList.add('visible');
                       }, 1000);
-                    window.removeEventListener('scroll', handleScroll); // イベントリスナーを削除
+                    window.removeEventListener('scroll', handleScroll);
                 }
             }
        });
