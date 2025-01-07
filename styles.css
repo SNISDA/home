@@ -1,102 +1,58 @@
+/* スマートフォン向けのスタイル (デフォルト) */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    font-size: 16px; /* フォントサイズ */
+    margin: 0; /* ページのマージンをリセット */
+    padding: 0; /* ページのパディングをリセット */
+    font-family: Arial, sans-serif; /* フォントファミリー */
 }
 
 header {
-    background: #333;
-    color: #fff;
-    padding: 1em 0;
-    text-align: center;
+    background-color: #f8f8f8; /* ヘッダーの背景色 */
+    padding: 10px; /* ヘッダーの内側の余白 */
+    text-align: center; /* テキストを中央揃え */
 }
 
-header h1 {
-    margin: 0;
-}
-
-section {
-    padding: 2em;
-    margin: 1em;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-section h2 {
-    border-bottom: 2px solid #eee;
-    padding-bottom: 0.5em;
-    margin-bottom: 1em;
-}
-
-#services ul {
-    list-style: none;
-    padding: 0;
-}
-
-#services li {
-    background: #f9f9f9;
-    margin-bottom: 0.5em;
-    padding: 0.7em;
-    border-left: 4px solid #5cb85c;
-    border-radius: 4px;
-}
-
-#contact form {
-    display: flex;
-    flex-direction: column;
-}
-
-#contact label {
-    margin-top: 0.5em;
-    display: block;
-}
-
-#contact input,
-#contact textarea {
-    padding: 0.8em;
-    margin-bottom: 1em;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-family: inherit;
-    font-size: 1em;
-}
-
-#contact button {
-    background-color: #5cb85c;
-    color: white;
-    padding: 1em;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#contact button:hover {
-    background-color: #4cae4c;
-}
-
-footer {
-    text-align: center;
-    padding: 1em 0;
-    background: #333;
-    color: #fff;
-    margin-top: 2em;
-}
-
-/* レスポンシブ対応 */
-@media (min-width: 768px) {
-    section {
-      margin: 2em auto;
-      width: 80%;
-    }
+h1 {
+    font-size: 24px; /* H1のフォントサイズ */
 }
 
 .banner-image {
-    width: 100%; /* ページの幅に合わせる */
+    width: 100%; /* スマートフォンでは全幅 */
     height: auto; /* 高さを自動で調整 */
     display: block; /* 下の要素との隙間をなくすため */
+}
+
+section {
+    padding: 20px; /* セクション内の余白 */
+}
+
+h2 {
+    font-size: 20px; /* H2のフォントサイズ */
+}
+
+footer {
+    text-align: center; /* フッターのテキストを中央揃え */
+    background-color: #f1f1f1; /* フッターの背景色 */
+    padding: 10px; /* フッターの内側の余白 */
+}
+
+/* PC向けのスタイル */
+@media (min-width: 768px) {
+    body {
+        font-size: 18px; /* PC用のフォントサイズ */
+    }
+
+    .banner-image {
+        width: 80%; /* PCでは80%の幅 */
+        margin: 0 auto; /* 中央寄せ */
+    }
+
+    header, footer {
+        text-align: left; /* PCでは左揃え */
+    }
+
+    section {
+        max-width: 800px; /* セクションの最大幅 */
+        margin: 0 auto; /* セクションを中央寄せ */
+    }
 }
