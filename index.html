@@ -39,6 +39,8 @@
             opacity: 0;
             transition: opacity 0.5s ease-in;
             min-height: 100vh;
+            border: 5px solid rgba(246, 222, 90, 1.0); /* 枠線を追加 */
+            box-sizing: border-box; /* paddingとborderを幅に含める */
         }
         .content.visible {
             opacity: 1;
@@ -67,8 +69,8 @@
             box-sizing: border-box;
             opacity: 0;
             transition: opacity 0.5s ease-in;
-            background-color: #ffffff; /* 背景を白に */
-            border: none; /* 枠線を削除 */
+            background-color: #ffffff;
+            border: none;
         }
          .text-content.visible {
           opacity: 1;
