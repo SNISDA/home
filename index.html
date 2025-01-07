@@ -217,16 +217,21 @@
 
             // 2. ユーザーが100px下にスクロールしたタイミングで、テキストブロックとcontentが順に表示
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 100) { // 100pxに変更
-                    scrollText.classList.add('visible'); // テキストブロックを表示
-                    mainContent.classList.add('visible');
-                    bannerImage.classList.add('visible');
-                    setTimeout(() => {
-                        textContent.classList.add('visible');
-                    }, 500);
-                    window.removeEventListener('scroll', handleScroll); // イベントリスナーを削除
-                }
-            });
+        if (window.scrollY > 100) {
+            scrollText.classList.add('visible');
+
+            // ★ 変更点：setTimeoutで遅延実行
+            setTimeout(() => {
+                mainContent.classList.add('visible');
+                bannerImage.classList.add('visible');
+                setTimeout(() => {
+                    textContent.classList.add('visible');
+                }, 500);
+            }, 500); // テキストブロック表示後、0.5秒遅延
+
+            window.removeEventListener('scroll', handleScroll);
+        }
+    });
 
             function handleScroll() {
                 // この関数はスクロールイベント内で直接呼ばれることはない
