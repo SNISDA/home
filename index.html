@@ -10,6 +10,7 @@
             margin: 0;
             font-family: "Yu Gothic", sans-serif;
             background-color: #8B8D8C; /* 通常の背景色 */
+            overflow: hidden; /* スクロールを防ぐ */
         }
 
         /* ウェルカムメッセージスタイル */
@@ -34,6 +35,8 @@
             padding: 20px; /* 上部のスペースを削除 */
             position: relative; /* 子要素のための相対位置設定 */
             z-index: 1; /* ウェルカムメッセージよりも低いz-index */
+            opacity: 0; /* 初期の不透明度 */
+            transition: opacity 1s ease-in; /* 不透明度の遷移 */
         }
 
         /* バナー画像スタイル */
@@ -74,7 +77,7 @@
 <body>
     <div class="welcome-message" id="welcomeMessage">Welcome!</div>
     
-    <div class="content">
+    <div class="content" id="mainContent">
         <img src="ham_image_gray.png" alt="バナー画像" class="banner-image">
         
         <div class="text-content">
@@ -119,14 +122,16 @@
         // script.js
         window.onload = function() {
             const welcomeMessage = document.getElementById('welcomeMessage');
+            const mainContent = document.getElementById('mainContent');
             
-            // 1.5秒後にウェルカムメッセージを非表示にする
+            // 1.5秒後にウェルカムメッセージを非表示にし、コンテンツを表示する
             setTimeout(() => {
                 welcomeMessage.style.opacity = '0'; // 不透明度を0に設定
                 // 遅延してからメッセージを削除
                 setTimeout(() => {
                     welcomeMessage.style.display = 'none'; // メッセージを非表示にする
-                }, 500); // CSSの遷移と合わせて1秒後に実行
+                    mainContent.style.opacity = '1'; // コンテンツを表示する
+                }, 1000); // CSSの遷移と合わせて1秒後に実行
             }, 1500); // 1.5秒後に実行
         };
     </script>
