@@ -21,25 +21,25 @@
             align-items: center;
             font-size: 3rem;
             opacity: 1;
-            transition: opacity 1.5s ease-out; /* フェードアウトの時間を1.5秒に変更 */
+            transition: opacity 1.5s ease-out;
             z-index: 1000;
             position: fixed;
-            pointer-events: none; /* ポインターイベントを無効化 */
+            pointer-events: none;
         }
-         .welcome-message.hidden {
+        .welcome-message.hidden {
           opacity: 0;
-          display: none; /* opacityが0になった後に非表示にする */
+          display: none;
          }
         .main-image-container {
             position: fixed;
-            top: 0;
+            top: 0; /* ページ上部に固定 */
             left: 0;
             width: 100%;
             height: 100vh;
             z-index: 998;
-             opacity: 0; /* 初期状態を透明にする */
-             transition: opacity 0.5s ease-in; /* フェードイン */
-             pointer-events: none; /* ポインターイベントを無効化 */
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+            pointer-events: none;
         }
         .main-image-container.visible {
             opacity: 1;
@@ -51,11 +51,11 @@
         }
         .main-message {
              position: fixed;
-            top: 0;
+            top: 0; /* ページ上部に固定 */
             left: 0;
             width: 100%;
             height: 100vh;
-            color: #fff; /* 文字色を白に設定 */
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -64,7 +64,7 @@
             z-index: 999;
             opacity: 0;
             transition: opacity 0.5s ease-in;
-            pointer-events: none; /* ポインターイベントを無効化 */
+            pointer-events: none;
             
         }
          .main-message.visible {
