@@ -14,7 +14,8 @@ body {
 /* バナー画像スタイル */
 .banner-image {
     width: 100%; /* 幅を100%に設定 */
-    height: auto; /* 高さを自動に設定 */
+    height: 300px; /* 高さを固定（お好みで調整） */
+    object-fit: cover; /* 画像をトリミングし、高さを維持 */
 }
 
 /* テキストコンテナのスタイル */
@@ -33,6 +34,7 @@ body {
 
     .banner-image {
         width: 50%; /* 画像の幅を50%に設定 */
+        height: auto; /* 高さを自動に設定（必要に応じて変更） */
     }
 
     .text-content {
