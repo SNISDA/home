@@ -39,7 +39,6 @@
             opacity: 0;
             transition: opacity 0.5s ease-in;
             min-height: 100vh;
-            /* border: 5px solid rgba(246, 222, 90, 1.0);  枠線を削除 */
             box-sizing: border-box;
         }
         .content.visible {
@@ -59,8 +58,8 @@
             opacity: 0;
             transition: opacity 0.5s ease-in;
         }
-         .banner-image.visible {
-          opacity: 1;
+        .banner-image.visible {
+            opacity: 1;
         }
         .text-content {
             flex: 1;
@@ -71,9 +70,11 @@
             transition: opacity 0.5s ease-in;
             background-color: #ffffff;
             border: none;
+            border-radius: 10px; /* 丸角を適用 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 影を適用 */
         }
-         .text-content.visible {
-          opacity: 1;
+        .text-content.visible {
+            opacity: 1;
         }
         h2 {
             position: relative;
@@ -87,7 +88,7 @@
             }
         }
          footer {
-            position: relative; /* 線の基準位置 */
+            position: relative;
             text-align: center;
             padding: 10px 0;
         }
@@ -97,9 +98,9 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%; /* 線の幅 */
-            height: 2px; /* 線の太さ */
-            background-color: rgba(246, 222, 90, 1.0); /* 線の色 */
+            width: 80%;
+            height: 2px;
+            background-color: rgba(246, 222, 90, 1.0);
         }
         @media (min-width: 768px) {
             .content {
