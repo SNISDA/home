@@ -5,98 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <style>
-        /* 全体のスタイル */
         body {
             margin: 0;
             font-family: "Yu Gothic", sans-serif;
-            background-color: #F1F6F6; /* 通常の背景色 */
-            overflow: hidden; /* スクロールを防ぐ */
+            background-color: #F1F6F6;
+            overflow: hidden;
         }
-
-        /* ウェルカムメッセージスタイル */
         .welcome-message {
             width: 100%;
-            height: 100vh; /* ビューポートの高さに合わせる */
-            background-color: rgba(246, 222, 90, 1.0); /* 透過色の背景 */
-            color: #FFFFFF; /* 白文字 */
+            height: 100vh;
+            background-color: rgba(246, 222, 90, 1.0);
+            color: #FFFFFF;
             display: flex;
-            justify-content: center; /* 中央揃え */
-            align-items: center; /* 中央揃え */
-            font-size: 3rem; /* フォントサイズ */
-            opacity: 1; /* 初期の不透明度 */
-            transition: opacity 1s ease-out; /* 不透明度の遷移 */
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            opacity: 1;
+            transition: opacity 0.5s ease-out; /* フェードアウトの時間を短縮 */
         }
-
-        /* コンテンツ全体のスタイル */
         .content {
-            display: flex; 
+            display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px; /* 上部のスペースを削除 */
-            position: relative; /* 子要素のための相対位置設定 */
-            z-index: 1; /* ウェルカムメッセージよりも低いz-index */
-            opacity: 0; /* 初期の不透明度 */
-            transition: opacity 1s ease-in; /* 不透明度の遷移 */
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease-in; /* フェードインの時間を短縮 */
         }
-
-        /* バナー画像スタイル */
         .banner-image {
-            width: 100%; 
-            height: auto; 
-            object-fit: cover; 
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            loading: lazy; /* 画像の遅延読み込みを追加 */
         }
-
-        /* テキストコンテナのスタイル */
         .text-content {
-            width: 100%; 
-            padding: 20px; 
-            box-sizing: border-box; 
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
         }
-
-        /* アンダーラインのスタイル */
         h2 {
-            position: relative; /* アンダーラインを相対的に配置 */
-            overflow: hidden; /* はみ出す部分を隠す */
+            position: relative;
+            overflow: hidden;
         }
-
         h2::after {
             content: '';
             position: absolute;
             left: 0;
             bottom: 0;
             width: 100%;
-            height: 5px; /* アンダーラインの高さ */
-            background: rgba(246, 222, 90, 1.0); /* アンダーラインの色 */
-            transform: translateX(100%); /* 右から出現させるために右にずらす */
-            animation: fadeIn 0.5s forwards; /* アニメーションを適用 */
-            opacity: 0; /* 初期状態では非表示 */
+            height: 5px;
+            background: rgba(246, 222, 90, 1.0);
+            transform: translateX(100%);
+            animation: fadeIn 0.5s forwards;
+            opacity: 0;
         }
-
-        /* アンダーラインのフェードインアニメーション */
         @keyframes fadeIn {
             to {
-                transform: translateX(0); /* 元の位置に戻す */
-                opacity: 1; /* 不透明度を1に */
+                transform: translateX(0);
+                opacity: 1;
             }
         }
-
-        /* PC向けのスタイル */
         @media (min-width: 768px) {
             .content {
-                flex-direction: row; 
-                justify-content: space-between; 
-                align-items: stretch; 
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: stretch;
             }
-
             .banner-image {
-                width: 50%; 
-                height: auto; 
-                object-fit: cover; 
+                width: 50%;
             }
-
             .text-content {
-                width: 50%; 
-                padding: 20px; 
+                width: 50%;
             }
         }
     </style>
@@ -105,14 +85,13 @@
     <div class="welcome-message" id="welcomeMessage">Welcome!</div>
     
     <div class="content" id="mainContent">
-        <img src="image_logo.png" alt="バナー画像" class="banner-image">
+        <img src="image_logo.png" alt="バナー画像" class="banner-image" loading="lazy"> <!-- 画像の遅延読み込み -->
         
         <div class="text-content">
             <section id="about">
                 <h2>About</h2>
                 <p>ここに自己紹介や経歴を書きます。</p>
             </section>
-
             <section id="services">
                 <h2>Services</h2>
                 <ul>
@@ -121,20 +100,16 @@
                     <li>サービス3の説明</li>
                 </ul>
             </section>
-
             <section id="contact">
                 <h2>Contact</h2>
                 <p>メールアドレス: example@example.com</p>
                 <form>
                     <label for="name">名前:</label>
                     <input type="text" id="name" name="name" required>
-
                     <label for="email">メールアドレス:</label>
                     <input type="email" id="email" name="email" required>
-
                     <label for="message">メッセージ:</label>
                     <textarea id="message" name="message" required></textarea>
-
                     <button type="submit">送信</button>
                 </form>
             </section>
@@ -146,27 +121,24 @@
     </footer>
 
     <script>
-        // script.js
         window.onload = function() {
             const welcomeMessage = document.getElementById('welcomeMessage');
             const mainContent = document.getElementById('mainContent');
-            
-            // 1.5秒後にウェルカムメッセージを非表示にし、コンテンツを表示する
-            setTimeout(() => {
-                welcomeMessage.style.opacity = '0'; // 不透明度を0に設定
-                // 遅延してからメッセージを削除
-                setTimeout(() => {
-                    welcomeMessage.style.display = 'none'; // メッセージを非表示にする
-                    mainContent.style.opacity = '1'; // コンテンツを表示する
 
-                    // h2のアンダーラインを表示するために0.5秒後にアニメーションを開始
+            // ここでタイミングを短縮
+            setTimeout(() => {
+                welcomeMessage.style.opacity = '0';
+                setTimeout(() => {
+                    welcomeMessage.style.display = 'none';
+                    mainContent.style.opacity = '1';
+                    // h2のアンダーラインを表示
                     const headers = document.querySelectorAll('h2');
-                    headers.forEach((header) => {
-                        header.style.animationDelay = '0.5s'; // アニメーション開始を遅延
-                        header.classList.add('underline-animation'); // アンダーラインのアニメーションをトリガー
+                    headers.forEach(header => {
+                        header.style.animationDelay = '0.1s'; // アニメーションの遅延も短縮
+                        header.classList.add('underline-animation');
                     });
-                }, 1000); // CSSの遷移と合わせて1秒後に実行
-            }, 1500); // 1.5秒後に実行
+                }, 500); // フェードアウトの時間に合わせて短縮
+            }, 1000); // フェードインの前の待機時間を短縮
         };
     </script>
 </body>
