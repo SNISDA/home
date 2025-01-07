@@ -38,6 +38,8 @@
             height: auto;
             object-fit: cover;
             loading: lazy;
+            opacity: 0; /* 初期は非表示 */
+            transition: opacity 0.5s ease-in; /* フェードイン効果 */
         }
         .text-content {
             width: 100%;
@@ -110,15 +112,6 @@
             <section id="contact">
                 <h2>Contact</h2>
                 <p>メールアドレス: example@example.com</p>
-                <form>
-                    <label for="name">名前:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="email">メールアドレス:</label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="message">メッセージ:</label>
-                    <textarea id="message" name="message" required></textarea>
-                    <button type="submit">送信</button>
-                </form>
             </section>
         </div>
     </div>
@@ -131,21 +124,24 @@
         window.onload = function() {
             const welcomeMessage = document.getElementById('welcomeMessage');
             const mainContent = document.getElementById('mainContent');
+            const bannerImage = document.querySelector('.banner-image');
 
             setTimeout(() => {
                 welcomeMessage.style.opacity = '0';
                 setTimeout(() => {
                     welcomeMessage.style.display = 'none';
                     mainContent.style.opacity = '1';
+                    bannerImage.style.opacity = '1'; // バナー画像を表示
 
-                    const sections = document.querySelectorAll('.text-content section');
-                    sections.forEach((section, index) => {
-                        section.classList.add('fade-in');
-                        setTimeout(() => {
-                            section.classList.add('visible');
-                        }, index * 500 + 1000); // 500msごとにフェードイン
-                    });
-
+                    setTimeout(() => {
+                        const sections = document.querySelectorAll('.text-content section');
+                        sections.forEach((section, index) => {
+                            section.classList.add('fade-in');
+                            setTimeout(() => {
+                                section.classList.add('visible');
+                            }, index * 500 + 500); // 500msごとにフェードイン
+                        });
+                    }, 1000); // 画像表示後、さらに1秒遅らせてテキスト表示
                 }, 1000);
             }, 1000);
         };
