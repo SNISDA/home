@@ -21,55 +21,54 @@
             align-items: center;
             font-size: 3rem;
             opacity: 1;
-            transition: opacity 0.5s ease-out, display 0.5s 0.5s;
+            transition: opacity 1.5s ease-out; /* フェードアウトの時間を1.5秒に変更 */
             z-index: 1000;
             position: fixed;
+            pointer-events: none; /* ポインターイベントを無効化 */
         }
-        .welcome-message.hidden {
-            opacity: 0;
-            display: none;
-        }
-          .main-image-container {
-            position: fixed; /* 固定配置 */
+         .welcome-message.hidden {
+          opacity: 0;
+          display: none; /* opacityが0になった後に非表示にする */
+         }
+        .main-image-container {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-             z-index: 998; /* メッセージより後ろに表示 */
-            display: none;
+            z-index: 998;
+             opacity: 0; /* 初期状態を透明にする */
+             transition: opacity 0.5s ease-in; /* フェードイン */
+             pointer-events: none; /* ポインターイベントを無効化 */
         }
-         .main-image-container.visible {
-            display: block;
+        .main-image-container.visible {
+            opacity: 1;
         }
-         .main-image {
+        .main-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 画像をカバー表示 */
-           opacity: 0;
-            transition: opacity 0.5s ease-in;
+            object-fit: cover;
         }
-         .main-image.visible {
-          opacity: 1;
-         }
         .main-message {
-            display: none;
+             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100vh;
-            color: #333;
+            color: #fff; /* 文字色を白に設定 */
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 4rem;
             text-align: center;
-            position: fixed;
-            z-index: 999; /* 画像より前に表示 */
+            z-index: 999;
             opacity: 0;
             transition: opacity 0.5s ease-in;
-           
+            pointer-events: none; /* ポインターイベントを無効化 */
+            
         }
-        .main-message.visible {
+         .main-message.visible {
             opacity: 1;
-           display: flex;
         }
         .content {
             display: flex;
@@ -190,36 +189,47 @@
     <footer>
         <p>&copy; 2025 Shuhei Nishida. All Rights Reserved.</p>
     </footer>
-    <script>
-      window.addEventListener('DOMContentLoaded', function() {
-            const welcomeMessage = document.getElementById('welcomeMessage');
-            const mainImageContainer = document.getElementById('mainImageContainer');
-             const mainImage = document.getElementById('mainImage');
-            const mainMessage = document.getElementById('mainMessage');
-            const mainContent = document.getElementById('mainContent');
-            const bannerImage = document.getElementById('bannerImage');
-            const textContent = document.getElementById('textContent');
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const mainImageContainer = document.getElementById('mainImageContainer');
+        const mainImage = document.getElementById('mainImage');
+        const mainMessage = document.getElementById('mainMessage');
+        const mainContent = document.getElementById('mainContent');
+        const bannerImage = document.getElementById('bannerImage');
+        const textContent = document.getElementById('textContent');
 
+        // 1. Welcome messageを表示し、1.5秒後にフェードアウト
+        setTimeout(() => {
+            welcomeMessage.classList.add('hidden');
+              // 2. main.pngを表示し、その0.5秒後に画像前面にmain messageを表示
+               setTimeout(() => {
+                mainImageContainer.classList.add('visible');
+                 setTimeout(() => {
+                    mainMessage.classList.add('visible');
+                    }, 500)
+            }, 500)
+        }, 1500);
+
+        // 3. ユーザーが200px下にスクロールしたタイミングで、contentが順に表示
+        window.addEventListener('scroll', () => {
+          if(window.scrollY > 200){
+            mainContent.classList.add('visible');
+            bannerImage.classList.add('visible');
             setTimeout(() => {
-                welcomeMessage.classList.add('hidden');
-                 mainImageContainer.classList.add('visible') //画像を非表示を解除
-                mainImage.classList.add('visible');
-                 mainMessage.classList.add('visible');
-                  window.addEventListener('scroll', handleScroll);
-            }, 1000);
+             textContent.classList.add('visible');
+             }, 500)
+
+            window.removeEventListener('scroll', handleScroll);
+          }
+           
+         });
 
 
-
-            function handleScroll() {
-                if (window.scrollY > 100) { // 任意のスクロール量を設定
-                    mainContent.classList.add('visible');
-                    bannerImage.classList.add('visible');
-                      setTimeout(() => {
-                        textContent.classList.add('visible');
-                      }, 1000);
-                    window.removeEventListener('scroll', handleScroll);
-                }
-            }
+        function handleScroll() {
+        // この関数はスクロールイベント内で直接呼ばれることはない
+         //スクロールイベントが削除され、処理が終わるようにするため
+        }
        });
     </script>
 </body>
