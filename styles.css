@@ -31,6 +31,10 @@ body {
         justify-content: space-between; /* スペースを持たせる */
     }
 
+    .banner-image {
+        width: 50%; /* 画像の幅を50%に設定 */
+    }
+
     .text-content {
         width: 50%; /* テキストエリアは50%の幅 */
         padding: 20px; /* テキストエリアの内側の余白 */
