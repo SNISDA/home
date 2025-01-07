@@ -9,7 +9,7 @@
             margin: 0;
             font-family: "Yu Gothic", sans-serif;
             background-color: #F2F4F3;
-            overflow: hidden;
+            overflow-x: hidden; /* 水平方向のスクロールバーを非表示 */
         }
         .welcome-message {
             width: 100%;
@@ -21,8 +21,13 @@
             align-items: center;
             font-size: 3rem;
             opacity: 1;
-            transition: opacity 0.5s ease-out;
-            z-index: 1000; /* 他の要素の上に表示されるように */
+            transition: opacity 0.5s ease-out, display 0.5s 0.5s;
+            z-index: 1000;
+            position: fixed; /* 固定配置に変更 */
+        }
+        .welcome-message.hidden {
+            opacity: 0;
+            display: none;
         }
         .content {
             display: flex;
@@ -33,34 +38,43 @@
             z-index: 1;
             opacity: 0;
             transition: opacity 0.5s ease-in;
-            height: 100vh; /* 高さを指定 */
+            min-height: 100vh; /* 最小高さを指定 */
+        }
+        .content.visible {
+            opacity: 1;
         }
         .image-content {
-            flex: 1; /* Flexboxを利用して画像コンテンツを拡張 */
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .banner-image {
-            max-width: 100%; /* 最大幅を100%に設定 */
-            height: auto; /* 高さは自動調整 */
-            object-fit: cover; /* アスペクト比を保持 */
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
             loading: lazy;
-            opacity: 0; /* 初期は非表示 */
-            transition: opacity 0.5s ease-in; /* フェードイン効果 */
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        .banner-image.visible {
+          opacity: 1;
         }
         .text-content {
-            flex: 1; /* Flexboxを利用してテキストコンテンツを拡張 */
-            width: 100%; /* 幅を100%に設定 */
+            flex: 1;
+            width: 100%;
             padding: 20px;
             box-sizing: border-box;
-            opacity: 0; /* 初期は非表示 */
-            transition: opacity 0.5s ease-in; /* フェードイン効果 */
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        .text-content.visible {
+          opacity: 1;
         }
         h2 {
             position: relative;
             overflow: hidden;
-            text-decoration: none; /* アンダーラインを消す */
+            text-decoration: none;
         }
         @keyframes fadeIn {
             to {
@@ -70,26 +84,23 @@
         }
         @media (min-width: 768px) {
             .content {
-                flex-direction: row; /* 横並びに変更 */
+                flex-direction: row;
             }
             .banner-image {
-                flex: 1; /* フレックスで画像を拡張 */
-                max-width: 100%; /* 最大幅を100%に設定 */
+                flex: 1;
             }
             .text-content {
-                flex: 1; /* フレックスでテキストを拡張 */
+                flex: 1;
             }
         }
     </style>
 </head>
 <body>
     <div class="welcome-message" id="welcomeMessage">Welcome!</div>
-    
     <div class="content" id="mainContent">
         <div class="image-content">
-            <img src="image_monotone.png" alt="バナー画像" class="banner-image" loading="lazy">
+            <img src="image_monotone.png" alt="バナー画像" class="banner-image" loading="lazy" id="bannerImage">
         </div>
-        
         <div class="text-content" id="textContent">
             <section id="about">
                 <h2>About</h2>
@@ -109,31 +120,23 @@
             </section>
         </div>
     </div>
-
     <footer>
         <p>&copy; 2025 Shuhei Nishida. All Rights Reserved.</p>
     </footer>
-
     <script>
         window.onload = function() {
             const welcomeMessage = document.getElementById('welcomeMessage');
             const mainContent = document.getElementById('mainContent');
-            const bannerImage = document.querySelector('.banner-image');
+            const bannerImage = document.getElementById('bannerImage');
             const textContent = document.getElementById('textContent');
-
             setTimeout(() => {
-                welcomeMessage.style.opacity = '0';
-                setTimeout(() => {
-                    welcomeMessage.style.display = 'none';
-                    mainContent.style.opacity = '1';
-                    bannerImage.style.opacity = '1'; // バナー画像を表示
-
-                    // 1秒後にテキストコンテンツを表示
-                    setTimeout(() => {
-                        textContent.style.opacity = '1'; // テキストコンテンツを表示
-                    }, 1000); // 1秒後にテキストコンテンツを表示
+                welcomeMessage.classList.add('hidden');
+                mainContent.classList.add('visible');
+                bannerImage.classList.add('visible');
+                  setTimeout(() => {
+                     textContent.classList.add('visible');
                 }, 1000);
-            }, 1000);
+           }, 1000);
         };
     </script>
 </body>
