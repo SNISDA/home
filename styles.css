@@ -94,3 +94,9 @@ footer {
       width: 80%;
     }
 }
+
+.banner-image {
+    width: 100%; /* ページの幅に合わせる */
+    height: auto; /* 高さを自動で調整 */
+    display: block; /* 下の要素との隙間をなくすため */
+}
