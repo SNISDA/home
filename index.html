@@ -21,7 +21,7 @@
             align-items: center;
             font-size: 3rem;
             opacity: 1;
-            transition: opacity 0.5s ease-out; /* フェードアウトの時間を短縮 */
+            transition: opacity 0.5s ease-out;
         }
         .content {
             display: flex;
@@ -31,13 +31,13 @@
             position: relative;
             z-index: 1;
             opacity: 0;
-            transition: opacity 0.5s ease-in; /* フェードインの時間を短縮 */
+            transition: opacity 0.5s ease-in;
         }
         .banner-image {
             width: 100%;
             height: auto;
             object-fit: cover;
-            loading: lazy; /* 画像の遅延読み込みを追加 */
+            loading: lazy;
         }
         .text-content {
             width: 100%;
@@ -66,6 +66,13 @@
                 opacity: 1;
             }
         }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
         @media (min-width: 768px) {
             .content {
                 flex-direction: row;
@@ -85,7 +92,7 @@
     <div class="welcome-message" id="welcomeMessage">Welcome!</div>
     
     <div class="content" id="mainContent">
-        <img src="image_logo.png" alt="バナー画像" class="banner-image" loading="lazy"> <!-- 画像の遅延読み込み -->
+        <img src="image_logo.png" alt="バナー画像" class="banner-image" loading="lazy">
         
         <div class="text-content">
             <section id="about">
@@ -125,20 +132,22 @@
             const welcomeMessage = document.getElementById('welcomeMessage');
             const mainContent = document.getElementById('mainContent');
 
-            // ここでタイミングを短縮
             setTimeout(() => {
                 welcomeMessage.style.opacity = '0';
                 setTimeout(() => {
                     welcomeMessage.style.display = 'none';
                     mainContent.style.opacity = '1';
-                    // h2のアンダーラインを表示
-                    const headers = document.querySelectorAll('h2');
-                    headers.forEach(header => {
-                        header.style.animationDelay = '2.0s'; // アニメーションの遅延も短縮
-                        header.classList.add('underline-animation');
+
+                    const sections = document.querySelectorAll('.text-content section');
+                    sections.forEach((section, index) => {
+                        section.classList.add('fade-in');
+                        setTimeout(() => {
+                            section.classList.add('visible');
+                        }, index * 500); // 500msごとにフェードイン
                     });
-                }, 500); // フェードアウトの時間に合わせて短縮
-            }, 1000); // フェードインの前の待機時間を短縮
+
+                }, 500);
+            }, 1000);
         };
     </script>
 </body>
