@@ -68,13 +68,6 @@
                 opacity: 1;
             }
         }
-        .fade-in {
-            opacity: 0;
-            transition: opacity 0.5s ease-in;
-        }
-        .fade-in.visible {
-            opacity: 1;
-        }
         @media (min-width: 768px) {
             .content {
                 flex-direction: row;
@@ -133,15 +126,11 @@
                     mainContent.style.opacity = '1';
                     bannerImage.style.opacity = '1'; // バナー画像を表示
 
-                    setTimeout(() => {
-                        const sections = document.querySelectorAll('.text-content section');
-                        sections.forEach((section, index) => {
-                            section.classList.add('fade-in');
-                            setTimeout(() => {
-                                section.classList.add('visible');
-                            }, index * 500 + 500); // 500msごとにフェードイン
-                        });
-                    }, 1000); // 画像表示後、さらに1秒遅らせてテキスト表示
+                    // セクションに対するフェードイン効果を削除
+                    const sections = document.querySelectorAll('.text-content section');
+                    sections.forEach((section) => {
+                        section.style.opacity = '1'; // すぐに表示
+                    });
                 }, 1000);
             }, 1000);
         };
