@@ -42,9 +42,19 @@ footer {
         font-size: 18px; /* PC用のフォントサイズ */
     }
 
+    .content {
+        display: flex; /* フレックスボックスで横並びに */
+    }
+
     .banner-image {
-        width: 80%; /* PCでは80%の幅 */
-        margin: 0 auto; /* 中央寄せ */
+        width: 70%; /* PCでは70%の幅 */
+        margin: 0;  /* マージンをリセット */
+    }
+
+    .text-content {
+        width: 30%; /* テキストエリアは30%の幅 */
+        padding: 20px; /* テキストエリアの内側の余白 */
+        box-sizing: border-box; /* パディングを含めた幅を計算 */
     }
 
     header, footer {
