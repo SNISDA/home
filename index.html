@@ -10,21 +10,22 @@
             font-family: "Yu Gothic", sans-serif;
             background-color: #F2F4F3;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
+            display: flex; /* bodyをフレックスコンテナにする */
+            flex-direction: column; /* 子要素を縦に並べる */
         }
-        .main-header {
+         .main-header {
             width: 100%;
-            position: relative;
+            position: relative; /* 子要素を相対配置の基準にする */
+
         }
         .main-image-container {
-            width: 100%;
+           width: 100%;
             height: 100vh;
             z-index: 998;
             opacity: 0;
             transition: opacity 0.5s ease-in;
             pointer-events: none;
-            position: relative;
+             position: relative;
         }
         .main-image-container.visible {
             opacity: 1;
@@ -48,19 +49,12 @@
             opacity: 0;
             transition: opacity 0.5s ease-in;
             pointer-events: none;
-            position: absolute;
+            position: absolute; /* 画像の上に重ねる */
             top: 0;
-            left: 0;
+             left: 0;
+
         }
         .main-message.visible {
-            opacity: 1;
-        }
-        .about-text {
-            opacity: 0; /* 初期状態は非表示 */
-            transition: opacity 0.5s ease-in;
-            padding: 20px; /* 必要に応じてpaddingを追加 */
-        }
-        .about-text.visible {
             opacity: 1;
         }
         .content {
@@ -71,14 +65,82 @@
             position: relative;
             z-index: 1;
             opacity: 0;
-            transition: opacity 0.5s ease-in;
-            min-height: 100vh;
+             transition: opacity 0.5s ease-in;
+            min-height: 100vh; /* コンテンツが少ない場合でも最低限の高さは確保 */
             box-sizing: border-box;
         }
-        .content.visible {
+         .content.visible {
+           opacity: 1;
+         }
+        .image-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .banner-image {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+            loading: lazy;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        .banner-image.visible {
             opacity: 1;
         }
-        /* ... (他のスタイルは変更なし) */
+        .text-content {
+            flex: 1;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .text-content.visible {
+            opacity: 1;
+        }
+        h2 {
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        @keyframes fadeIn {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+         footer {
+            position: relative;
+            text-align: center;
+            padding: 10px 0;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background-color: rgba(246, 222, 90, 1.0);
+        }
+        @media (min-width: 768px) {
+            .content {
+                flex-direction: row;
+            }
+            .banner-image {
+                flex: 1;
+            }
+            .text-content {
+                flex: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -88,8 +150,6 @@
         </div>
         <div class="main-message" id="mainMessage">Decision Support <br>Based on Data</div>
     </div>
-
-    <div class="about-text" id="aboutText"> <p>個人だからこそできる伴走型サポートで、<br>ビジネスの成長をすぐそばで支えます。</p> </div>
 
     <div class="content" id="mainContent">
         <div class="image-content">
@@ -120,37 +180,44 @@
     <footer>
         <p>&copy; 2025 Shuhei Nishida. All Rights Reserved.</p>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mainImageContainer = document.getElementById('mainImageContainer');
-            const mainMessage = document.getElementById('mainMessage');
-            const aboutText = document.getElementById('aboutText'); // about-text要素を取得
-            const mainContent = document.getElementById('mainContent');
-            const bannerImage = document.getElementById('bannerImage');
-            const textContent = document.getElementById('textContent');
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainImageContainer = document.getElementById('mainImageContainer');
+        const mainImage = document.getElementById('mainImage');
+        const mainMessage = document.getElementById('mainMessage');
+        const mainContent = document.getElementById('mainContent');
+        const bannerImage = document.getElementById('bannerImage');
+        const textContent = document.getElementById('textContent');
 
+        // 1. main.pngを表示し、その0.5秒後に画像前面にmain messageを表示
+        setTimeout(() => {
+             mainImageContainer.classList.add('visible');
+             setTimeout(() => {
+                mainMessage.classList.add('visible');
+             }, 500);
+        }, 500);
+
+
+        // 2. ユーザーが200px下にスクロールしたタイミングで、contentが順に表示
+        window.addEventListener('scroll', () => {
+          if(window.scrollY > 200){
+            mainContent.classList.add('visible');
+            bannerImage.classList.add('visible');
             setTimeout(() => {
-                mainImageContainer.classList.add('visible');
-                setTimeout(() => {
-                    mainMessage.classList.add('visible');
-                }, 500);
-            }, 500);
+              textContent.classList.add('visible');
+             }, 500);
 
-            let aboutTextVisible = false; // about-textの表示状態を追跡する変数
+            window.removeEventListener('scroll', handleScroll);
+          }
 
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 200 && !aboutTextVisible) { // 100pxスクロールかつ未表示の場合
-                    aboutText.classList.add('visible');
-                    aboutTextVisible = true; // 表示状態を更新
+         });
 
-                    mainContent.classList.add('visible');
-                    bannerImage.classList.add('visible');
-                    setTimeout(() => {
-                        textContent.classList.add('visible');
-                    }, 500);
-                }
-            });
-        });
+
+        function handleScroll() {
+        // この関数はスクロールイベント内で直接呼ばれることはない
+         //スクロールイベントが削除され、処理が終わるようにするため
+        }
+       });
     </script>
 </body>
 </html>
