@@ -45,6 +45,8 @@
             width: 100%;
             padding: 20px;
             box-sizing: border-box;
+            opacity: 0; /* 初期は非表示 */
+            transition: opacity 0.5s ease-in; /* フェードイン効果 */
         }
         h2 {
             position: relative;
@@ -89,9 +91,9 @@
     <div class="content" id="mainContent">
         <div class="image-content">
             <img src="image_monotone.png" alt="バナー画像" class="banner-image" loading="lazy">
-        </div>div>
+        </div>
         
-        <div class="text-content">
+        <div class="text-content" id="textContent">
             <section id="about">
                 <h2>About</h2>
                 <p>ここに自己紹介や経歴を書きます。</p>
@@ -120,6 +122,7 @@
             const welcomeMessage = document.getElementById('welcomeMessage');
             const mainContent = document.getElementById('mainContent');
             const bannerImage = document.querySelector('.banner-image');
+            const textContent = document.getElementById('textContent');
 
             setTimeout(() => {
                 welcomeMessage.style.opacity = '0';
@@ -128,11 +131,10 @@
                     mainContent.style.opacity = '1';
                     bannerImage.style.opacity = '1'; // バナー画像を表示
 
-                    // セクションに対するフェードイン効果を削除
-                    const sections = document.querySelectorAll('.text-content section');
-                    sections.forEach((section) => {
-                        section.style.opacity = '1'; // すぐに表示
-                    });
+                    // 1秒後にテキストコンテンツを表示
+                    setTimeout(() => {
+                        textContent.style.opacity = '1'; // テキストコンテンツを表示
+                    }, 1000); // 1秒後にテキストコンテンツを表示
                 }, 1000);
             }, 1000);
         };
