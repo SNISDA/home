@@ -34,7 +34,7 @@ body {
 
     .banner-image {
         width: 50%; /* 画像の幅を50%に設定 */
-        height: 500px; /* 高さを固定 */
+        height: 700px; /* 高さを固定 */
         object-fit: cover; /* 画像をトリミングし、高さを維持 */
     }
 
