@@ -139,7 +139,7 @@
             let aboutTextVisible = false; // about-textの表示状態を追跡する変数
 
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 100 && !aboutTextVisible) { // 100pxスクロールかつ未表示の場合
+                if (window.scrollY > 200 && !aboutTextVisible) { // 100pxスクロールかつ未表示の場合
                     aboutText.classList.add('visible');
                     aboutTextVisible = true; // 表示状態を更新
 
