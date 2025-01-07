@@ -5,6 +5,24 @@ body {
     background-color: #AAACAB; /* 背景色をグレーに設定 */
 }
 
+/* ウェルカムメッセージスタイル */
+.welcome-message {
+    position: fixed; /* 固定位置に設定 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* ビューポートの高さに合わせる */
+    background-color: #F6DE5A; /* 黄色の背景 */
+    color: #FFFFFF; /* 白文字 */
+    display: flex;
+    justify-content: center; /* 中央揃え */
+    align-items: center; /* 中央揃え */
+    font-size: 3rem; /* フォントサイズ */
+    opacity: 1; /* 初期の不透明度 */
+    transition: opacity 1s ease-out; /* 不透明度の遷移 */
+    z-index: 1000; /* 他の要素の上に表示 */
+}
+
 /* コンテンツ全体のスタイル */
 .content {
     display: flex; /* Flexboxを使用 */
