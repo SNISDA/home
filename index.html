@@ -11,39 +11,44 @@
         <h1>Work</h1>
     </header>
 
-    <!-- image.pngを追加 -->
-    <img src="image.png" alt="バナー画像" class="banner-image">
+    <div class="content">
+        <!-- image.pngを追加 -->
+        <img src="image.png" alt="バナー画像" class="banner-image">
+        
+        <!-- テキストコンテンツ -->
+        <div class="text-content">
+            <section id="about">
+                <h2>About</h2>
+                <p>ここに自己紹介や経歴を書きます。</p>
+            </section>
 
-    <section id="about">
-        <h2>About</h2>
-        <p>ここに自己紹介や経歴を書きます。</p>
-    </section>
+            <section id="services">
+                <h2>提供するサービス</h2>
+                <ul>
+                    <li>サービス1の説明</li>
+                    <li>サービス2の説明</li>
+                    <li>サービス3の説明</li>
+                </ul>
+            </section>
 
-    <section id="services">
-        <h2>提供するサービス</h2>
-        <ul>
-            <li>サービス1の説明</li>
-            <li>サービス2の説明</li>
-            <li>サービス3の説明</li>
-        </ul>
-    </section>
+            <section id="contact">
+                <h2>お問い合わせ</h2>
+                <p>メールアドレス: example@example.com</p>
+                <form>
+                    <label for="name">名前:</label>
+                    <input type="text" id="name" name="name" required>
 
-    <section id="contact">
-        <h2>お問い合わせ</h2>
-        <p>メールアドレス: example@example.com</p>
-        <form>
-            <label for="name">名前:</label>
-            <input type="text" id="name" name="name" required>
-            
-            <label for="email">メールアドレス:</label>
-            <input type="email" id="email" name="email" required>
+                    <label for="email">メールアドレス:</label>
+                    <input type="email" id="email" name="email" required>
 
-            <label for="message">メッセージ:</label>
-            <textarea id="message" name="message" required></textarea>
+                    <label for="message">メッセージ:</label>
+                    <textarea id="message" name="message" required></textarea>
 
-            <button type="submit">送信</button>
-        </form>
-    </section>
+                    <button type="submit">送信</button>
+                </form>
+            </section>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2025 Shuhei Nishida. All Rights Reserved.</p>
