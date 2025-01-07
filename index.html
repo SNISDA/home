@@ -70,12 +70,14 @@
             background: rgba(246, 222, 90, 1.0); /* アンダーラインの色 */
             transform: translateX(100%); /* 右から出現させるために右にずらす */
             animation: fadeIn 0.5s forwards; /* アニメーションを適用 */
+            opacity: 0; /* 初期状態では非表示 */
         }
 
         /* アンダーラインのフェードインアニメーション */
         @keyframes fadeIn {
             to {
                 transform: translateX(0); /* 元の位置に戻す */
+                opacity: 1; /* 不透明度を1に */
             }
         }
 
@@ -157,14 +159,15 @@
                 setTimeout(() => {
                     welcomeMessage.style.display = 'none'; // メッセージを非表示にする
                     mainContent.style.opacity = '1'; // コンテンツを表示する
+
+                    // h2のアンダーラインを表示するために0.5秒後にアニメーションを開始
+                    const headers = document.querySelectorAll('h2');
+                    headers.forEach((header) => {
+                        header.style.animationDelay = '0.5s'; // アニメーション開始を遅延
+                        header.classList.add('underline-animation'); // アンダーラインのアニメーションをトリガー
+                    });
                 }, 1000); // CSSの遷移と合わせて1秒後に実行
             }, 1500); // 1.5秒後に実行
-            
-            // h2のアンダーラインを表示するために、すぐにアニメーションを開始
-            const headers = document.querySelectorAll('h2');
-            headers.forEach((header) => {
-                header.style.animationDelay = '0.5s'; // アニメーション開始を遅延
-            });
         };
     </script>
 </body>
