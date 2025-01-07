@@ -30,24 +30,24 @@
             display: none;
         }
         .main-message {
-           display: none; /*最初は非表示*/
+            display: none; /*最初は非表示*/
             width: 100%;
             height: 100vh;
             color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
-             font-size: 4rem; /* テキストのサイズを大きく */
+            font-size: 4rem; /* テキストのサイズを大きく */
             text-align: center; /* テキストを中央揃え */
             position: fixed; /* welcome-messageと同じく固定配置 */
-           z-index: 999; /* 他の要素の上に表示 */
-           opacity: 0; /* フェードインのため透明にする */
-           transition: opacity 0.5s ease-in; /* フェードインのアニメーションを設定 */
+            z-index: 999; /* 他の要素の上に表示 */
+            opacity: 0; /* フェードインのため透明にする */
+            transition: opacity 0.5s ease-in; /* フェードインのアニメーションを設定 */
         }
-         .main-message.visible {
+        .main-message.visible {
             opacity: 1; /* フェードイン */
             display: flex;
-          }
+        }
         .content {
             display: flex;
             flex-direction: column;
@@ -165,31 +165,32 @@
         <p>&copy; 2025 Shuhei Nishida. All Rights Reserved.</p>
     </footer>
     <script>
-        window.onload = function() {
+      window.addEventListener('DOMContentLoaded', function() {
             const welcomeMessage = document.getElementById('welcomeMessage');
-             const mainMessage = document.getElementById('mainMessage');
+            const mainMessage = document.getElementById('mainMessage');
             const mainContent = document.getElementById('mainContent');
             const bannerImage = document.getElementById('bannerImage');
-             const textContent = document.getElementById('textContent');
+            const textContent = document.getElementById('textContent');
 
             setTimeout(() => {
                 welcomeMessage.classList.add('hidden');
-                mainMessage.classList.add('visible'); // メインメッセージを表示
-                 window.addEventListener('scroll', handleScroll); // スクロールイベントを追加
+                 mainMessage.classList.add('visible');
+                  window.addEventListener('scroll', handleScroll);
             }, 1000);
 
 
-           function handleScroll() {
-              if (window.scrollY > 100) { // 任意のスクロール量を設定
-                  mainContent.classList.add('visible');
-                   bannerImage.classList.add('visible');
-                    setTimeout(() => {
-                     textContent.classList.add('visible');
-                     }, 1000);
-                   window.removeEventListener('scroll', handleScroll); // イベントリスナーを削除
+
+            function handleScroll() {
+                if (window.scrollY > 100) { // 任意のスクロール量を設定
+                    mainContent.classList.add('visible');
+                    bannerImage.classList.add('visible');
+                      setTimeout(() => {
+                        textContent.classList.add('visible');
+                      }, 1000);
+                    window.removeEventListener('scroll', handleScroll); // イベントリスナーを削除
                 }
             }
-        };
+       });
     </script>
 </body>
 </html>
