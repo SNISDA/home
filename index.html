@@ -141,6 +141,18 @@
                 flex: 1;
             }
         }
+            .scroll-text { /* 追加：スクロールで表示するテキストブロックのスタイル */
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        opacity: 0; /* 最初は非表示 */
+        transition: opacity 0.5s ease-in;
+        background-color: rgba(255, 255, 255, 0.8); /* 半透明の背景 */
+        margin-bottom: 20px; /* 下のマージンを追加 */
+    }
+    .scroll-text.visible { /* 追加：表示状態 */
+        opacity: 1;
+    }
     </style>
 </head>
 <body>
@@ -149,6 +161,11 @@
             <img src="main.png" alt="Main Image" class="main-image" id="mainImage">
         </div>
         <div class="main-message" id="mainMessage">Decision Support <br>Based on Data</div>
+    </div>
+
+    <div class="scroll-text" id="scrollText">
+        <p>スクロールすると表示されるテキストです。</p>
+        <p>必要に応じて複数行のテキストも追加できます。</p>
     </div>
 
     <div class="content" id="mainContent">
@@ -198,26 +215,24 @@
         }, 500);
 
 
-        // 2. ユーザーが200px下にスクロールしたタイミングで、contentが順に表示
-        window.addEventListener('scroll', () => {
-          if(window.scrollY > 200){
-            mainContent.classList.add('visible');
-            bannerImage.classList.add('visible');
-            setTimeout(() => {
-              textContent.classList.add('visible');
-             }, 500);
+            // 2. ユーザーが100px下にスクロールしたタイミングで、テキストブロックとcontentが順に表示
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) { // 100pxに変更
+                    scrollText.classList.add('visible'); // テキストブロックを表示
+                    mainContent.classList.add('visible');
+                    bannerImage.classList.add('visible');
+                    setTimeout(() => {
+                        textContent.classList.add('visible');
+                    }, 500);
+                    window.removeEventListener('scroll', handleScroll); // イベントリスナーを削除
+                }
+            });
 
-            window.removeEventListener('scroll', handleScroll);
-          }
-
-         });
-
-
-        function handleScroll() {
-        // この関数はスクロールイベント内で直接呼ばれることはない
-         //スクロールイベントが削除され、処理が終わるようにするため
-        }
-       });
+            function handleScroll() {
+                // この関数はスクロールイベント内で直接呼ばれることはない
+                //スクロールイベントが削除され、処理が終わるようにするため
+            }
+        });
     </script>
 </body>
 </html>
