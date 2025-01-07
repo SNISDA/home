@@ -13,25 +13,7 @@
             display: flex; /* bodyをフレックスコンテナにする */
             flex-direction: column; /* 子要素を縦に並べる */
         }
-        /* 新しい固定ヘッダー */
-        .fixed-header {
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒背景 */
-            padding: 10px; /* 内側の余白 */
-            box-sizing: border-box; /* paddingを含めて幅を計算 */
-            display: flex; /* Flexboxを使用 */
-            align-items: center; /* 垂直方向中央揃え */
-        }
-        .header-title { /* 「Hamster」のスタイル */
-            color: white;
-            font-size: 1.5rem; /* 文字サイズ */
-            margin-left: 10px;
-        }
-         .main-image {
+         .main-header {
             width: 100%;
             position: relative; /* 子要素を相対配置の基準にする */
 
@@ -164,10 +146,7 @@
     </style>
 </head>
 <body>
-    <div class="fixed-header">
-        <span class="header-title">Hamster</span>
-    </div>
-    <div class="main-imager">
+    <div class="main-header">
         <div class="main-image-container" id="mainImageContainer">
             <img src="main.png" alt="Main Image" class="main-image" id="mainImage">
         </div>
